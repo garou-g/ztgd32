@@ -1,2 +1,2 @@
 # ztgd32
-CMSIS library for some of Gigadevice cpus
+CMSIS library for some of GigaDevice cpu.
