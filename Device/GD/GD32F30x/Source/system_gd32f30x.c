@@ -39,6 +39,8 @@
 #define __HXTAL           (HXTAL_VALUE)            /* high speed crystal oscillator frequency */
 #define __SYS_OSC_CLK     (__IRC8M)                /* main oscillator frequency */
 
+uint32_t SystemCoreClock;
+
 /* select a system clock by uncommenting the following line */
 /* use IRC8M */
 #define __SYSTEM_CLOCK_IRC8M                    (uint32_t)(__IRC8M)
