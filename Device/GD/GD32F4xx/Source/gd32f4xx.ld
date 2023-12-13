@@ -85,6 +85,23 @@ SECTIONS
         _edata = .;     /* Define a global symbol at data end */
     } >RAM AT> FLASH
 
+    /* CCM-RAM section
+     *
+     * IMPORTANT NOTE!
+     * If initialized variables will be placed in this section,
+     * the startup code needs to be modified to copy the init-values.
+     */
+    .ram_data :
+    {
+        . = ALIGN(4);
+        _sccmram = .;   /* Create a global symbol at ccmram start */
+        *(.ram_data)    /* .ram_data sections */
+        *(.ram_data*)   /* .ram_data* sections */
+
+        . = ALIGN(4);
+        _eccmram = .;   /* Define a global symbol at ccmram end */
+    } >CCMRAM AT> FLASH
+
     /* Uninitialized data section */
     . = ALIGN(4);
     .bss :
