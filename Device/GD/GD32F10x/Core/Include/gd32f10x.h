@@ -306,7 +306,6 @@ typedef enum IRQn
 
 /* includes */
 #include "core_cm3.h"
-#include "system_gd32f10x.h"
 #include <stdint.h>
 
 /* enum definitions */

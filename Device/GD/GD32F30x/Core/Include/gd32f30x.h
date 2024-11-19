@@ -282,7 +282,6 @@ typedef enum IRQn
 
 /* includes */
 #include "core_cm4.h"
-#include "system_gd32f30x.h"
 #include <stdint.h>
 
 /* enum definitions */
