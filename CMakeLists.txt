@@ -69,6 +69,26 @@ elseif(${ZT_CPU_SERIES} STREQUAL GD32F30X_HD)
         message(FATAL_ERROR "Unsupported CPU model selected... (${ZT_CPU_MODEL})")
     endif()
 
+elseif(${ZT_CPU_SERIES} STREQUAL GD32F10X_MD)
+    list(APPEND ${PROJECT_NAME}_DEFINES -DGD32F10X_MD)
+
+    # Path constants
+    set(CORE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/Device/GD/GD32F10x/Core)
+    set(SPL_SRC ${CMAKE_CURRENT_SOURCE_DIR}/Device/GD/GD32F10x/GD32F10x_standard_peripheral)
+
+    # Add SPL sources
+    list(APPEND ${PROJECT_NAME}_SOURCES
+        ${CORE_SRC}/Source/startup_gd32f10x_md.s
+        ${CORE_SRC}/Source/system_gd32f10x.c
+    )
+
+    # Choose CPU
+    if(${ZT_CPU_MODEL} STREQUAL GD32F103C8)
+        set(LINKER_SCRIPT gd32f103c8_flash.ld)
+    else()
+        message(FATAL_ERROR "Unsupported CPU model selected... (${ZT_CPU_MODEL})")
+    endif()
+
 else()
     message(FATAL_ERROR "Unsupported CPU series selected... (${ZT_CPU_SERIES})")
 endif()
