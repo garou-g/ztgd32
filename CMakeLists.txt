@@ -45,7 +45,7 @@ if(${ZT_CPU_SERIES} STREQUAL GD32F4xx)
         message(FATAL_ERROR "Unsupported CPU model selected... (${ZT_CPU_MODEL})")
     endif()
 
-    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Source/libarm_cortexM4lf_math.a)
+    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/libarm_cortexM4lf_math.a)
 
 elseif(${ZT_CPU_SERIES} STREQUAL GD32F30X_HD)
     list(APPEND ${PROJECT_NAME}_DEFINES -DGD32F30X_HD)
@@ -68,6 +68,30 @@ elseif(${ZT_CPU_SERIES} STREQUAL GD32F30X_HD)
     else()
         message(FATAL_ERROR "Unsupported CPU model selected... (${ZT_CPU_MODEL})")
     endif()
+
+    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/libarm_cortexM4lf_math.a)
+
+elseif(${ZT_CPU_SERIES} STREQUAL GD32F30X_XD)
+    list(APPEND ${PROJECT_NAME}_DEFINES -DGD32F30X_XD)
+
+    # Path constants
+    set(CORE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/Device/GD/GD32F30x/Core)
+    set(SPL_SRC ${CMAKE_CURRENT_SOURCE_DIR}/Device/GD/GD32F30x/GD32F30x_standard_peripheral)
+
+    # Add SPL sources
+    list(APPEND ${PROJECT_NAME}_SOURCES
+        ${CORE_SRC}/Source/startup_gd32f30x_xd.s
+        ${CORE_SRC}/Source/system_gd32f30x.c
+    )
+
+    # Choose CPU
+    if(${ZT_CPU_MODEL} STREQUAL GD32F303CG)
+        set(LINKER_SCRIPT gd32f303cg_flash.ld)
+    else()
+        message(FATAL_ERROR "Unsupported CPU model selected... (${ZT_CPU_MODEL})")
+    endif()
+
+    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/libarm_cortexM4lf_math.a)
 
 elseif(${ZT_CPU_SERIES} STREQUAL GD32F10X_MD)
     list(APPEND ${PROJECT_NAME}_DEFINES -DGD32F10X_MD)
