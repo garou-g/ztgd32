@@ -45,8 +45,6 @@ if(${ZT_CPU_SERIES} STREQUAL GD32F4xx)
         message(FATAL_ERROR "Unsupported CPU model selected... (${ZT_CPU_MODEL})")
     endif()
 
-    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/libarm_cortexM4lf_math.a)
-
 elseif(${ZT_CPU_SERIES} STREQUAL GD32F30X_HD)
     list(APPEND ${PROJECT_NAME}_DEFINES -DGD32F30X_HD)
 
@@ -69,8 +67,6 @@ elseif(${ZT_CPU_SERIES} STREQUAL GD32F30X_HD)
         message(FATAL_ERROR "Unsupported CPU model selected... (${ZT_CPU_MODEL})")
     endif()
 
-    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/libarm_cortexM4lf_math.a)
-
 elseif(${ZT_CPU_SERIES} STREQUAL GD32F30X_XD)
     list(APPEND ${PROJECT_NAME}_DEFINES -DGD32F30X_XD)
 
@@ -90,8 +86,6 @@ elseif(${ZT_CPU_SERIES} STREQUAL GD32F30X_XD)
     else()
         message(FATAL_ERROR "Unsupported CPU model selected... (${ZT_CPU_MODEL})")
     endif()
-
-    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/libarm_cortexM4lf_math.a)
 
 elseif(${ZT_CPU_SERIES} STREQUAL GD32F10X_MD)
     list(APPEND ${PROJECT_NAME}_DEFINES -DGD32F10X_MD)
@@ -137,4 +131,5 @@ target_compile_definitions(${PROJECT_NAME} INTERFACE ${${PROJECT_NAME}_DEFINES})
 target_include_directories(${PROJECT_NAME} INTERFACE ${${PROJECT_NAME}_INCLUDES})
 target_sources(${PROJECT_NAME} INTERFACE ${${PROJECT_NAME}_SOURCES})
 target_link_options(${PROJECT_NAME} INTERFACE -L${CORE_SRC}/Source -T ${CORE_SRC}/Source/${LINKER_SCRIPT})
+target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/libarm_cortexM4lf_math.a)
 target_link_libraries(${PROJECT_NAME} INTERFACE)
