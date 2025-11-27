@@ -45,6 +45,8 @@ if(${ZT_CPU_SERIES} STREQUAL GD32F4xx)
 
         if(${ZT_TARGET_MEMORY} STREQUAL RAM)
             set(LINKER_SCRIPT gd32f407vg_ram.ld)
+        elseif(${ZT_TARGET_MEMORY} STREQUAL FLASH_W_BOOT)
+            set(LINKER_SCRIPT gd32f407vg_flash_w_boot.ld)
         else()
             set(LINKER_SCRIPT gd32f407vg_flash.ld)
         endif()
